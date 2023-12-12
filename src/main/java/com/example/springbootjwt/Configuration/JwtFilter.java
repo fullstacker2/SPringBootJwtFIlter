@@ -2,6 +2,7 @@ package com.example.springbootjwt.Configuration;
 
 import com.example.springbootjwt.Service.TokenService;
 import org.bson.types.ObjectId;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.ServletRequestPathFilter;
 
@@ -9,11 +10,11 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Configuration
 public class JwtFilter extends GenericFilterBean {
     private TokenService tokenService;
     public JwtFilter(TokenService tokenService) {
