@@ -38,15 +38,6 @@ public class MovieService {
         return movieRepo.findAll();
     }
 
-    // delete movie by id
-    public void deleteMovieById(ObjectId id) {
-        Optional<Movie> optMovie = movieRepo.findById(id);
-        if(optMovie.isEmpty()) {
-            throw new RuntimeException("Movie id" + id + "doesn't exist");
-        }
-        movieRepo.deleteById(id);
-    }
-
     // update Movie
     public String updateMovie(String id, Movie movie) {
         ObjectId objectId = new ObjectId(id);
@@ -66,6 +57,17 @@ public class MovieService {
                 "\"data\":"+movieRepo+",\n"+
                 "}";
     }
+
+    // delete movie by id
+    public void deleteMovieById(ObjectId id) {
+        Optional<Movie> optMovie = movieRepo.findById(id);
+        if(optMovie.isEmpty()) {
+            throw new RuntimeException("Movie id" + id + "doesn't exist");
+        }
+        movieRepo.deleteById(id);
+    }
+
+    // remove all movies
     public void removeAllMovies() { movieRepo.deleteAll();}
 
     // get number of movies
