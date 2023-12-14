@@ -41,7 +41,9 @@ public class MovieService {
     //get movie by id
     public Movie getMovieById(ObjectId id) throws MovieException {
         Optional<Movie> optMovie = movieRepo.findById(id);
-        if(optMovie == null) throw new MovieException("Movie doesn't exist");
+        if(optMovie.isEmpty() || optMovie == null) {
+            throw new MovieException("Movie doesn't exist");
+        }
         return optMovie.orElseGet(optMovie::get);
     }
 
