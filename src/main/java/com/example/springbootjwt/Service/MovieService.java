@@ -1,9 +1,13 @@
 package com.example.springbootjwt.Service;
 
+import com.example.springbootjwt.Configuration.StatusResponse;
+import com.example.springbootjwt.ExceptionHandler.MovieException;
 import com.example.springbootjwt.Model.Movie;
 import com.example.springbootjwt.Repository.MovieRepo;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,17 +23,25 @@ public class MovieService {
     }
 
     //create movie
-    public String createMovie(Movie movie) {
+    public ResponseEntity<StatusResponse> createMovie(Movie movie) {
         Movie savedMovie = movieRepo.save(movie);
+        StatusResponse statusResponse = new StatusResponse();
+        statusResponse.setStatusCode(200);
+        statusResponse.setStatusMsg("Movie created successfully");
+        /*
         return "{" +
                 "\"message\":"+"Successfully created movie\",\n"+
                 "\"data\":"+savedMovie+",\n"+
                 "}";
+
+        */
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.CREATED);
     }
 
     //get movie by id
-    public Movie getMovieById(ObjectId id) {
+    public Movie getMovieById(ObjectId id) throws MovieException {
         Optional<Movie> optMovie = movieRepo.findById(id);
+        if(optMovie == null) throw new MovieException("Movie doesn't exist");
         return optMovie.orElseGet(optMovie::get);
     }
 

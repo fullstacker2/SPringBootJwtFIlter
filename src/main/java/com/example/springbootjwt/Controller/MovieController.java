@@ -1,11 +1,14 @@
 package com.example.springbootjwt.Controller;
 
+import com.example.springbootjwt.Configuration.StatusResponse;
 import com.example.springbootjwt.ExceptionHandler.IdException;
+import com.example.springbootjwt.ExceptionHandler.MovieException;
 import com.example.springbootjwt.Model.Movie;
 import com.example.springbootjwt.Model.PayloadValidation;
 import com.example.springbootjwt.Service.MovieService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class MovieController {
 
     // add a movie
     @PostMapping("/add")
-    public String saveMovie(@RequestBody Movie movie) throws IdException{
+    public ResponseEntity<StatusResponse> saveMovie(@RequestBody Movie movie) throws IdException{
         if(!PayloadValidation.payloadVal(movie)) {
             throw new IdException("ObjectId not defined");
         }
@@ -30,7 +33,7 @@ public class MovieController {
 
     // get movie by id
     @GetMapping("/get/{id}")
-    public Movie getMovieById(@PathVariable ObjectId id) {return movieService.getMovieById(id);}
+    public Movie getMovieById(@PathVariable ObjectId id) throws MovieException {return movieService.getMovieById(id);}
 
     // get all movies
     @GetMapping("get-movies")

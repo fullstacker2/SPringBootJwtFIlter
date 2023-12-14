@@ -12,6 +12,6 @@ public class MovieException extends Exception{
     }
 
     public String getErrorMsg() {
-        return errorMsg;
+        return this.errorMsg;
     }
 }
