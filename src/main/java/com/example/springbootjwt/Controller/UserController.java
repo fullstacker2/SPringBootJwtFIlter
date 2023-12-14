@@ -39,4 +39,17 @@ public class UserController {
         ObjectId userId = (ObjectId) request.getAttribute("userId");
         return userService.getUser(userId);
     }
+
+    @GetMapping("get-age/{num}")
+    public String getUserByAge(@PathVariable int num)
+    {
+        return userService.getUserByAgeLessThan(num);
+    }
+
+    @PostMapping("getNE")
+    public String getUserByNameOrEmail(@RequestBody Map<String, Object> map)
+    {
+        return userService.getUserByNameOrAge(map.get("name").toString(), map.get("email").toString());
+    }
+
 }

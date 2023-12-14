@@ -55,4 +55,26 @@ public class UserService {
                 "\"token\":\""+tokenService.createToken(foundUsers.get(0).getId())+"\"" +
                 "}";
     }
+
+    public String getUserByAgeLessThan(int age)
+    {
+        var optUser = userRepo.getUserLessThanAge(age);
+        if (optUser.isEmpty())
+        {
+            return "No users found";
+        }
+
+        return "{'message': User Found.\n \t 'data':"+ optUser.toString()+" }";
+    }
+
+    public String getUserByNameOrAge(String name, String email)
+    {
+        var optUser = userRepo.getUserByNameOrEmail(name,email);
+        if (optUser.isEmpty())
+        {
+            return "No users found";
+        }
+        return "{'message': User Found.\n \t 'data':"+ optUser.toString()+" }";
+    }
+
 }
