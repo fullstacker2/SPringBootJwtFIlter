@@ -24,7 +24,7 @@ public class MovieController {
 
     // add a movie
     @PostMapping("/add")
-    public ResponseEntity<StatusResponse> saveMovie(@RequestBody Movie movie) throws IdException{
+    public Movie saveMovie(@RequestBody Movie movie) throws IdException{
         if(!PayloadValidation.payloadVal(movie)) {
             throw new IdException("ObjectId not defined");
         }

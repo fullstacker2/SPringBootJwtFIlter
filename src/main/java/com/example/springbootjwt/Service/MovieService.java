@@ -23,19 +23,26 @@ public class MovieService {
     }
 
     //create movie
+    /*
     public ResponseEntity<StatusResponse> createMovie(Movie movie) {
         Movie savedMovie = movieRepo.save(movie);
         StatusResponse statusResponse = new StatusResponse();
         statusResponse.setStatusCode(200);
         statusResponse.setStatusMsg("Movie created successfully");
-        /*
-        return "{" +
-                "\"message\":"+"Successfully created movie\",\n"+
-                "\"data\":"+savedMovie+",\n"+
-                "}";
+        statusResponse.setData(movie);
 
-        */
-        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.CREATED);
+        //return "{" +
+         //       "\"message\":"+"Successfully created movie\",\n"+
+          //      "\"data\":"+savedMovie+",\n"+
+            //    "}";
+
+        return new ResponseEntity<StatusResponse>(statusResponse, HttpStatus.ACCEPTED);
+    }
+    */
+
+    public Movie createMovie(Movie movie) {
+        Movie savedMovie = movieRepo.save(movie);
+        return savedMovie;
     }
 
     //get movie by id
